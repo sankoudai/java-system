@@ -12,11 +12,25 @@ import javax.servlet.http.HttpServletResponse;
  */
 @RequestMapping("/web/cookie")
 @Controller
-public class CookieTesterController {
+public class CookieController {
     @RequestMapping("/set")
     public Object setCookie(HttpServletRequest request, HttpServletResponse response){
         Cookie cookie = new Cookie("testerCookie", "abc");
         response.addCookie(cookie);
         return "cookie/getter";
+    }
+
+    /**
+     * 测试设置cookie之后， 重定向
+     * 测试结果:（可以做到）
+     * @param request
+     * @param response
+     * @return
+     */
+    @RequestMapping("/set/redirect")
+    public Object setCookieAndRedirect(HttpServletRequest request, HttpServletResponse response){
+        Cookie cookie = new Cookie("setRedirectCookie", "abc");
+        response.addCookie(cookie);
+        return "redirect:/web/default/empty";
     }
 }
